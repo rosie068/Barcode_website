@@ -1,0 +1,22 @@
+{
+  "name": "barcode_website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rosie068/Barcode_website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rosie068/Barcode_website/issues"
+  },
+  "homepage": "https://github.com/rosie068/Barcode_website#readme",
+  "dependencies": {
+    "quagga": "^0.12.1"
+  }
+}
