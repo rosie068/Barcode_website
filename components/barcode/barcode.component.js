@@ -6,6 +6,7 @@ app.component('barcode', {
         let codeReader = new ZXing.BrowserMultiFormatReader();
 
         var outputMessage = function(msg){
+            console.log(msg);
             $("#output").append(`<div>${msg}</div>`);
         }
 
