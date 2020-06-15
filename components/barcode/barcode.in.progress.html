@@ -9,7 +9,7 @@
  <div class="controls">
    <fieldset class="input-group">
      <input type="file" accept="image/*;capture=camera">
-        <button id="btnIdents">Identify</button>
+        <input type="button" onclick="Test()" value="identify" />
    </fieldset>
  </div>
  <div id="interactive" class="viewport"><br clear="all"></div>
@@ -19,7 +19,7 @@
 <link rel="stylesheet" type="text/css" href="./css/fileinput.css">
 <script src="./js/file_input.js" type="text/javascript"></script>
 <script type="text/javascript">
-    
+/*  
 $(function() {var App = {
         init: function() {
             App.attachListeners();
@@ -27,6 +27,7 @@ $(function() {var App = {
         attachListeners: function() {
             var self = this;
             $("#btnIdents").on("click", function(e) {
+                alert("test")
                 var input = document.querySelector(".controls input[type=file]");
                 if (input.files && input.files.length) {
                     App.decode(URL.createObjectURL(input.files[0]));
@@ -37,6 +38,7 @@ $(function() {var App = {
             var self = this,
                 config = $.extend({}, self.state, {src: src});
             Quagga.decodeSingle(config, function(result) {
+                alert("HelloThisWorks")
                 //results
                 if(result.codeResult){
                     console.log(result.codeResult.code);
@@ -67,7 +69,86 @@ $(function() {var App = {
     };
 
     App.init();
+}); 
+*/
+
+function Test(){
+    var input = document.querySelector(".controls input[type=file]");
+    if (input.files && input.files.length) {
+        alert("input exists")
+        decode(URL.createObjectURL(input.files[0]));
+    }
+}
+
+/*
+$(function() {
+            $("#btnIdents").click(function() {
+            var input = document.querySelector(".controls input[type=file]");
+            if (input.files && input.files.length) {
+                decode(URL.createObjectURL(input.files[0]));
+            }
+            });
 });
+*/
+
+function decode(src){
+    /*
+      var config = {
+            inputStream: {
+            size: 800,
+            singleChannel: false
+            },
+            locator: {
+                patchSize: "medium",
+                halfSample: true
+               },
+             decoder: {
+                readers: [{
+                     format: "code_128_reader",
+                     config: {}
+                    }]
+                },
+             locate: true,
+              src: src
+       }
+    */
+
+    Quagga.decodeSingle({
+        inputStream: {
+            size: 800
+        },
+        locator: {
+            patchSåize: "medium",
+            halfSample: false
+        },
+        numOfWorkers: 1,
+        decoder: {
+            readers: [{
+                format: "code_128_reader",
+                config: {}
+            }]
+        },
+        locate: true,
+        src: src
+    }, function(result) {
+            alert("in the decode func"+result)
+
+            if(!result){
+               alert("No barcode detected！");
+               return false;
+            }
+            //result
+            if(result.codeResult){
+                console.log("The barcode detected is: "+ result.codeResult.code);
+                alert("The barcode detected is：" + result.codeResult.code);
+            }
+            else{
+                alert("Identification failed");
+            }
+   });
+}
+
+
 </script>
 </body>
 </html>
