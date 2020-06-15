@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<section id="container" class="container">
+ <div class="controls">
+   <fieldset class="input-group">
+     <input type="file" accept="image/*;capture=camera">
+        <button id="btnIdents">Identify</button>
+   </fieldset>
+ </div>
+ <div id="interactive" class="viewport"><br clear="all"></div>
+</section>
+<script src="https://cdn.bootcss.com/jquery/2.0.3/jquery.js" type="text/javascript"></script>
+<script src="./js/quagga.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="./css/fileinput.css">
+<script src="./js/file_input.js" type="text/javascript"></script>
+<script type="text/javascript">
+    
+$(function() {var App = {
+        init: function() {
+            App.attachListeners();
+        },
+        attachListeners: function() {
+            var self = this;
+            $("#btnIdents").on("click", function(e) {
+                var input = document.querySelector(".controls input[type=file]");
+                if (input.files && input.files.length) {
+                    App.decode(URL.createObjectURL(input.files[0]));
+                }
+            });
+        },
+        decode: function(src) {
+            var self = this,
+                config = $.extend({}, self.state, {src: src});
+            Quagga.decodeSingle(config, function(result) {
+                //results
+                if(result.codeResult){
+                    console.log(result.codeResult.code);
+                    alert("The barcode is：" + result.codeResult.code);
+                }else{
+                    alert("Barcode not detected！");
+                }
+            });
+        },
+        state: {
+            inputStream: {
+                size: 800,
+                singleChannel: false
+            },
+            locator: {
+                patchSize: "medium",
+                halfSample: true
+            },
+            decoder: {
+                readers: [{
+                    format: "code_128_reader",
+                    config: {}
+                }]
+            },
+            locate: true,
+            src: null
+        }
+    };
+
+    App.init();
+});
+</script>
+</body>
+</html>
