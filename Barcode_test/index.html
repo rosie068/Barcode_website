@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>Angular App</title>
+        <script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
+        <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css">
+
+        <script src="app.js" charset="utf-8"></script>
+        <script src="https://unpkg.com/@zxing/library@latest"></script>
+        <script src="./components/barcode/barcode.component.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        
+    </head>
+    
+    <body ng-controller="main">
+        <barcode></barcode>
+    </body>
+</html>
