@@ -1,0 +1,23 @@
+<style>
+    .video-off{
+        display: none;
+    }
+    .main-wrapper{
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+    #video{
+        width: 90%;
+        height: auto;
+    }
+</style>
+
+<div class="main-wrapper">
+    <h1>Barcode Reader</h1>
+    <button class="video-on" ng-click="startVideoDecoding();">Start</button>
+    <button class="video-off" ng-click="endVideoDecoding();">Stop</button>
+    <div class="video-off">
+        <video id="video" style="border: 1px solid gray" playsinline controls="true"></video>
+    </div>
+    <div id="output" style="border: 1px black solid; height: 300px;"></div>
+</div>
