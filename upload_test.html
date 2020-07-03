@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="ZXing for JS">
+
+    <title>Decoding QR Code from image file</title>
+    
+    <script src="https://cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
+    <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css">
+
+    <script src="https://unpkg.com/@zxing/library@latest"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+
+<body>
+    <main class="wrapper" style="padding-top:2em">
+        <form action="" method="">
+            <input type="file" id="file">
+            <label for="file">Upload</label>
+            <img src="" alt="" id="myimg"/>
+        </form>
+
+        <section class="container" id="demo-content">
+            <div>
+                <a class="button" id="decodeButton">Decode</a>
+            </div>
+            <label>Result:</label>
+            <pre><code id="result"></code></pre>
+        </section>
+    </main>
+
+    <script>
+        var myimg = document.getElementById('myimg');
+        var file = document.getElementById('file');
+        file.onchange = function(){
+            var url;
+            var agent = navigator.userAgent;   //test browser version
+            if (agent.indexOf("MSIE")>=1) {
+              url = file.value;
+            } else if(agent.indexOf("Firefox")>0) {
+              url = window.URL.createObjectURL(file.files.item(0));
+            } else if(agent.indexOf("Chrome")>0) {
+              url = window.URL.createObjectURL(file.files.item(0));
+            }
+            myimg.src = url
+            myimg.style.display = "block";
+        }
+
+        window.addEventListener('load', function () {
+            const codeReader = new ZXing.BrowserQRCodeReader()
+            console.log('ZXing code reader initialized')
+
+            document.getElementById('decodeButton').addEventListener('click', () => {
+                const img = document.getElementById('myimg')
+                codeReader.decodeFromImage(img).then((result) => {
+                        console.log(result.text)
+                    }).catch((err) => {
+                        console.error(err)
+                    })
+            })
+
+        })
+    </script>
+
+</body>
+
+</html>
